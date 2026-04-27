@@ -1,6 +1,12 @@
 #!/usr/bin/env bash
 set -euo pipefail
 
+# Source conda env so vllm is on PATH when launched from Lightning deployment Command.
+if [ -f /home/zeus/miniconda3/etc/profile.d/conda.sh ]; then
+    source /home/zeus/miniconda3/etc/profile.d/conda.sh
+    conda activate cloudspace
+fi
+
 export HF_HOME="${HF_HOME:-/teamspace/studios/this_studio/.cache/huggingface}"
 export VLLM_USE_V1=1
 export VLLM_WORKER_MULTIPROC_METHOD=spawn
